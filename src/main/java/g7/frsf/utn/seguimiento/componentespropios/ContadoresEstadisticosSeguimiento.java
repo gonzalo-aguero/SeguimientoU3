@@ -7,4 +7,7 @@ public class ContadoresEstadisticosSeguimiento extends ContadoresEstadisticos {
     public void inicializar() {
 
     }
+
+    public void actualizarClientesProcesados() {
+    }
 }

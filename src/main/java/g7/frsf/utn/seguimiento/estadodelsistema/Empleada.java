@@ -24,10 +24,12 @@ public class Empleada {
 		this.clienteEnAtencion = Optional.of(solicitud);
 	}
 
-	public Cliente finalizarAtencionSolicitud(){
-		Cliente solicitudQueSale = clienteEnAtencion.orElseThrow(() -> new NoSuchElementException("No se estaba procesando una solicitud"));
+	public Cliente finalizarAtencionCliente(){
+		Cliente solicitudQueSale = clienteEnAtencion.orElseThrow(() -> new NoSuchElementException("No se estaba atendiendo a un cliente"));
 		this.clienteEnAtencion = Optional.empty();
 		return solicitudQueSale;
 	}
-
+	public void pasarADesocupada(){
+		this.clienteEnAtencion = Optional.empty();
+	}
 }

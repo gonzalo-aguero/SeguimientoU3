@@ -16,6 +16,10 @@ public class SeguimientoU3 extends EstadoDelSistema {
         return empleada.estaOcupado();
     }
 
+    public Cliente obtenerClienteEnEspera(){
+        return colaClientes.desencolarCliente();
+    }
+
     public void atenderCliente(Cliente cliente){
         empleada.atenderCliente(cliente);
     }
@@ -24,7 +28,15 @@ public class SeguimientoU3 extends EstadoDelSistema {
         colaClientes.encolarCliente(cliente);
     }
 
-    public Cliente finalizarAtencionSolicitud(){
-        return empleada.finalizarAtencionSolicitud();
+    public boolean hayClientesEnEspera(){
+        return colaClientes.getCantClientesEsperando()>0;
+    }
+
+    public Cliente finalizarAtencionCliente(){
+        return empleada.finalizarAtencionCliente();
+    }
+
+    public void desocuparEmpleada(){
+        empleada.pasarADesocupada();
     }
 }
