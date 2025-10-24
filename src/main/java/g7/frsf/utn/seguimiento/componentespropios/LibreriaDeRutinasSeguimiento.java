@@ -6,6 +6,7 @@ public class LibreriaDeRutinasSeguimiento extends LibreriaDeRutinas {
 
     public double tiempoEntreArribosClientes() {
         // Exponencial con media 4 minutos
+        // TODO: Checkear esto
         double media = 4;
         double lambda = 1.0 / media;
         double u = Math.random();
