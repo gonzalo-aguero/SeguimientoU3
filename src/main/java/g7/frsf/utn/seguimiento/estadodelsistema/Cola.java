@@ -18,11 +18,14 @@ public class Cola {
 
     public void encolarCliente(Cliente clienteArribado){
         clientesEnCola.add(clienteArribado);
+        cantClientesEnCola++;
     }
     public int getCantClientesEsperando(){
+        // ! Tambien podria retornar cantClientesEnCola (propiedad redundante)
         return clientesEnCola.size();
     }
     public Cliente desencolarCliente(){
+        cantClientesEnCola--;
         return clientesEnCola.remove();
     }
 

@@ -14,6 +14,7 @@ public class Main {
     private static GeneradorDeReportes reporte;
     private static LibreriaDeRutinas libreria;
     private static ListaDeEventos eventos;
+    private static RelojDeSimulacion reloj;
 
     public static void main(String[] args) {
         //Creación de los componentes propios del ejemplo a ejecutar.
@@ -22,7 +23,7 @@ public class Main {
         //Creación de los componentes generales.
         RutinaDeInicializacion inicializacion = new RutinaDeInicializacion();
         RutinaDeTiempo manejoDeTiempo = new RutinaDeTiempo();
-        RelojDeSimulacion reloj = new RelojDeSimulacion();
+        reloj = new RelojDeSimulacion();
 
         System.out.println("------------------------------------------------------");
         System.out.println("***INICIALIZACION");
@@ -80,4 +81,7 @@ public class Main {
 
     }
 
+    public static double getTiempoActual() {
+        return reloj.getValor();
+    }
 }

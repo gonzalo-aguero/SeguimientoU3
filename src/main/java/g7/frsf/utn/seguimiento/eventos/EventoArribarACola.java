@@ -8,8 +8,8 @@ import g7.frsf.utn.seguimiento.estadodelsistema.SeguimientoU3;
 
 public class EventoArribarACola extends Evento {
 
-    public EventoArribarACola(Double tiempoDeOcurrencia){
-        super(tiempoDeOcurrencia);
+    public EventoArribarACola(Double saltoDeTiempo){
+        super(saltoDeTiempo);
     }
     @Override
     public void rutinaDeEvento(EstadoDelSistema modelo, ContadoresEstadisticos contadores, ListaDeEventos eventos, LibreriaDeRutinas libreria) {
@@ -21,15 +21,19 @@ public class EventoArribarACola extends Evento {
         eventos.agregar(nuevoEvento);
 
         //Procesar este arribo, para lo cual es necesario generar la solicitud que acaba de arribar.
-        Producto prod = libreriaActual.tipoProductoAComprar();
-        Cliente clienteParaAgregar = new Cliente(libreriaActual.tiempoEntreArribosClientes(), prod, libreriaActual.cantidadDeArticulos(prod));
+        Producto producto = libreriaActual.tipoProductoAComprar();
+        Cliente clienteQueArribo = new Cliente(
+            libreriaActual.tiempoEntreArribosClientes(), // tiempoDeArribo
+            producto, // producto (tipo de producto)
+            libreriaActual.cantidadDeArticulos(producto) // cantidadDeProductos
+        );
 
         if(modeloActual.estaEmpleadaOcupada()) {
-            modeloActual.encolarCliente(clienteParaAgregar);
+            modeloActual.encolarCliente(clienteQueArribo);
         }
         else {
-            modeloActual.atenderCliente(clienteParaAgregar);
-            double duracionDelProcesamiento = libreriaActual.tiempoDeProcesamiento(clienteParaAgregar.getProducto(), clienteParaAgregar.getCantidadDeProductos());
+            modeloActual.atenderCliente(clienteQueArribo);
+            Double duracionDelProcesamiento = libreriaActual.tiempoDeProcesamiento(clienteQueArribo.getProducto(), clienteQueArribo.getCantidadDeProductos());
             EventoTerminaProcesamiento nuevoEventoAdicional = new EventoTerminaProcesamiento(duracionDelProcesamiento);
             eventos.agregar(nuevoEventoAdicional);
         }
