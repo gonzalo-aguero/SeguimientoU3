@@ -15,6 +15,7 @@ public class Main {
     private static LibreriaDeRutinas libreria;
     private static ListaDeEventos eventos;
     private static RelojDeSimulacion reloj;
+    private static int tiempoASimular = 8*60; // Simulación de 8 horas en minutos
 
     public static void main(String[] args) {
         //Creación de los componentes propios del ejemplo a ejecutar.
@@ -83,5 +84,9 @@ public class Main {
 
     public static double getTiempoActual() {
         return reloj.getValor();
+    }
+
+    public static int getTiempoASimular() {
+        return tiempoASimular;
     }
 }

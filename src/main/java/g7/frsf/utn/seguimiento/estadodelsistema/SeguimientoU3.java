@@ -43,4 +43,8 @@ public class SeguimientoU3 extends EstadoDelSistema {
     public void desocuparEmpleada(){
         empleada.pasarADesocupada();
     }
+
+    public int obtenerLongitudColaActual(){
+        return colaClientes.getCantClientesEsperando();
+    }
 }

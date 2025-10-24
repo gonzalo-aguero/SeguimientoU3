@@ -1,11 +1,44 @@
 package g7.frsf.utn.seguimiento.componentespropios;
 
+import g7.frsf.utn.Main;
 import g7.frsf.utn.des.ContadoresEstadisticos;
 import g7.frsf.utn.des.GeneradorDeReportes;
+import g7.frsf.utn.seguimiento.estadodelsistema.Cliente;
 
 public class GeneradorDeReportesSeguimiento extends GeneradorDeReportes {
     @Override
     public void run(ContadoresEstadisticos contadores) {
+        ContadoresEstadisticosSeguimiento contadoresSeguimiento = (ContadoresEstadisticosSeguimiento) contadores;
+        System.out.println("-----------------------------------------------------------");
+        System.out.println("**********REPORTE DE SIMULACION DE SEGUIMIENTO U3**********");
+        System.out.println("-----------------------------------------------------------");
+        System.out.println("Cantidad de clientes Procesados: " + contadoresSeguimiento.clientesProcesados);
+        System.out.println("Beneficio Total Acumulado: " + contadoresSeguimiento.beneficioTotalAcumulado);
 
+        // Calculo de la longitud promedio de la cola
+        Double longitudPromedioCola = contadoresSeguimiento.longitudColaAcumulada.doubleValue() / Main.getTiempoASimular();
+        System.out.println("Longitud Promedio de la Cola: " + longitudPromedioCola);
+
+        // Calculo del tiempo promedio de los clientes en el kiosco
+        Double tiempoPromedioClientesEnKiosco = contadoresSeguimiento.tiempoClientesEnKioscoAcumulado / contadoresSeguimiento.clientesProcesados;
+        System.out.println("Tiempo Promedio de Clientes en Kiosco: " + tiempoPromedioClientesEnKiosco);
+
+        // Calculo de la tasa de atencion por empleada
+        Double tasaAtencionPorEmpleada = contadoresSeguimiento.clientesProcesados.doubleValue() / Main.getTiempoASimular();
+        Double tasaAtencionPorHora = tasaAtencionPorEmpleada * 60;
+        System.out.println("Tasa de Atención por Empleada: " + tasaAtencionPorHora + " clientes por hora");
+
+        // Calculo del porcentaje de tiempo libre de la empleada
+        Double tiempoTotalSimulacion = Double.valueOf(Main.getTiempoASimular());
+        Double tiempoOcupacion;
+        //TODO: guardar un contador estadistico o algo asi que indique si la empleada está ocupada o no al finalizar la simulación
+        Boolean empleadaOcupada =  false; // Reemplazar con el valor real
+        if(empleadaOcupada == false) { // Si la empleada está desocupada al finalizar la simulación entonces completó todos los pedidos
+            tiempoOcupacion = contadoresSeguimiento.tiempoTotalOcupacion;
+        } else { // Si la empleada está ocupada al finalizar la simulación, se debe sumar el tiempo que lleva atendiendo al último cliente
+            tiempoOcupacion = contadoresSeguimiento.tiempoTotalOcupacion + (Main.getTiempoActual() - contadoresSeguimiento.tiempoDeInicioAtencionUltimoCliente);
+        }
+        Double porcentajeTiempoLibreEmpleada = ((tiempoTotalSimulacion - contadoresSeguimiento.tiempoTotalOcupacion) / tiempoTotalSimulacion) * 100;
+        System.out.println("Porcentaje de Tiempo Libre de la Empleada: " + porcentajeTiempoLibreEmpleada + "%");
     }
 }

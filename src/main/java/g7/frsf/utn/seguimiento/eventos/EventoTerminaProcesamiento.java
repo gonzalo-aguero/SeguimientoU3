@@ -18,8 +18,6 @@ public class EventoTerminaProcesamiento extends Evento {
     public void rutinaDeEvento(EstadoDelSistema modelo, ContadoresEstadisticos contadores, ListaDeEventos eventos, LibreriaDeRutinas libreria) {
 
         ContadoresEstadisticosSeguimiento contadoresEstadisticos = (ContadoresEstadisticosSeguimiento) contadores;
-        contadoresEstadisticos.actualizarClientesProcesados();
-
         SeguimientoU3 modeloActual = (SeguimientoU3) modelo;
         LibreriaDeRutinasSeguimiento libreriaActual = (LibreriaDeRutinasSeguimiento) libreria;
 
@@ -29,6 +27,19 @@ public class EventoTerminaProcesamiento extends Evento {
         clienteFinalizado.setTiempoDeFinAtencion(tiempoActualDeSimulacion); //TODO: Ver si conviene setearlo al finalizarAtencionCliente o al inicarAtencionCliente.
         modeloActual.finalizarAtencionCliente(tiempoActualDeSimulacion);
 
+        // Actualizar contadores estadisticos
+        contadoresEstadisticos.actualizarClientesProcesados();
+        Double beneficioObtenido = clienteFinalizado.getProducto().getBeneficioUnitario() * clienteFinalizado.getCantidadDeProductos();
+        contadoresEstadisticos.actualizarBeneficioTotalAcumulado(beneficioObtenido);
+
+        Double tiempoDeInicioAtencion = clienteFinalizado.getTiempoDeInicioAtencion();
+        Double tiempoDeFinAtencion = clienteFinalizado.getTiempoDeFinAtencion();
+        contadoresEstadisticos.actualizarTiempoClientesEnKioscoAcumulado(tiempoDeFinAtencion - tiempoDeInicioAtencion);
+
+        contadoresEstadisticos.actualizarTiempoTotalOcupacion(tiempoActualDeSimulacion - tiempoDeInicioAtencion);
+
+
+        // Verificar si hay clientes en espera para ser atendidos.
         if(modeloActual.hayClientesEnEspera()) {
             Cliente clienteAAtender = modeloActual.obtenerClienteEnEspera();
             modeloActual.atenderCliente(clienteAAtender);

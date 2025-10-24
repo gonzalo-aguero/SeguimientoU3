@@ -1,6 +1,8 @@
 package g7.frsf.utn.seguimiento.eventos;
 
+import g7.frsf.utn.Main;
 import g7.frsf.utn.des.*;
+import g7.frsf.utn.seguimiento.componentespropios.ContadoresEstadisticosSeguimiento;
 import g7.frsf.utn.seguimiento.componentespropios.LibreriaDeRutinasSeguimiento;
 import g7.frsf.utn.seguimiento.componentespropios.Producto;
 import g7.frsf.utn.seguimiento.estadodelsistema.Cliente;
@@ -16,17 +18,24 @@ public class EventoArribarACola extends Evento {
         SeguimientoU3 modeloActual = (SeguimientoU3) modelo;
         LibreriaDeRutinasSeguimiento libreriaActual = (LibreriaDeRutinasSeguimiento) libreria;
 
+        // Actualizar contadores estadisticos
+		ContadoresEstadisticosSeguimiento contadoresEstadisticos = (ContadoresEstadisticosSeguimiento) contadores;
+		contadoresEstadisticos.actualizarLongitudColaAcumulada(modeloActual.obtenerLongitudColaActual());
+
+
         //Agendar el próximo arribo de solicitud.
         EventoArribarACola nuevoEvento = new EventoArribarACola(libreriaActual.tiempoEntreArribosClientes());
         eventos.agregar(nuevoEvento);
 
         //Procesar este arribo, para lo cual es necesario generar la solicitud que acaba de arribar.
         Producto producto = libreriaActual.tipoProductoAComprar();
+        Double tiempoDeArribo = libreriaActual.tiempoEntreArribosClientes();
         Cliente clienteQueArribo = new Cliente(
-            libreriaActual.tiempoEntreArribosClientes(), // tiempoDeArribo
+            tiempoDeArribo, // tiempoDeArribo
             producto, // producto (tipo de producto)
             libreriaActual.cantidadDeArticulos(producto) // cantidadDeProductos
         );
+        contadoresEstadisticos.setTiempoDeInicioAtencionUltimoCliente(Main.getTiempoActual() + tiempoDeArribo);
 
         if(modeloActual.estaEmpleadaOcupada()) {
             modeloActual.encolarCliente(clienteQueArribo);
