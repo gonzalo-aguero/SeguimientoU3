@@ -55,7 +55,7 @@ public class Main {
 
     //MODIFICAR para indicar el Estado del Sistema a Simnular
     private static void crearComponentesDependientes() {
-        //TODO Aca se crean los componentes propios del modelo a ejecutar.
+        // Aca se crean los componentes propios del modelo a ejecutar.
         modelo = new SeguimientoU3();
         contadores = new ContadoresEstadisticosSeguimiento();
         reporte = new GeneradorDeReportesSeguimiento();
@@ -67,7 +67,7 @@ public class Main {
 
     //MODIFICAR para indicar el estado de Fin de Simulación
     private static boolean terminoLaSimulacion(RelojDeSimulacion reloj, ContadoresEstadisticos contadores) {
-        //TODO Aca se debe programar según el fin sea por tiempo o cantidad.
+        // Aca se debe programar según el fin sea por tiempo o cantidad.
 
         //Ejemplo por tiempo
         int tiempoDeSimulacion = 8*60; //8 horas en minutos
