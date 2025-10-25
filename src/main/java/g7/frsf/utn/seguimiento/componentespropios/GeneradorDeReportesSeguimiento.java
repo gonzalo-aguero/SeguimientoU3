@@ -3,7 +3,6 @@ package g7.frsf.utn.seguimiento.componentespropios;
 import g7.frsf.utn.Main;
 import g7.frsf.utn.des.ContadoresEstadisticos;
 import g7.frsf.utn.des.GeneradorDeReportes;
-import g7.frsf.utn.seguimiento.estadodelsistema.Cliente;
 
 public class GeneradorDeReportesSeguimiento extends GeneradorDeReportes {
     @Override

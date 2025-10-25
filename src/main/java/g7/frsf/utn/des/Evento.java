@@ -7,7 +7,7 @@ package g7.frsf.utn.des;
 public abstract class Evento {
 	
 	private double tiempoQueFaltaParaQueOcurra;
-	private double tiempoDeOcurrencia;//Tiempo Relativo
+	private double tiempoDeOcurrencia;//Tiempo Relativo TODO: CHECKEAR SI ES RELATIVO O ABSOLUTO
 	
 	public Evento(double saltoDeTiempo) {
 		super();

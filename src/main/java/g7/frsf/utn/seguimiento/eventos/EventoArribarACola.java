@@ -23,25 +23,25 @@ public class EventoArribarACola extends Evento {
 		contadoresEstadisticos.actualizarLongitudColaAcumulada(modeloActual.obtenerLongitudColaActual());
 
 
-        //Agendar el próximo arribo de solicitud.
+        // Programar el próximo arribo a la cola de clientes (antes de procesar el arribo actual).
         EventoArribarACola nuevoEvento = new EventoArribarACola(libreriaActual.tiempoEntreArribosClientes());
         eventos.agregar(nuevoEvento);
 
-        //Procesar este arribo, para lo cual es necesario generar la solicitud que acaba de arribar.
+        // Procesar el arribo de cliente actual.
         Producto producto = libreriaActual.tipoProductoAComprar();
-        Double tiempoDeArribo = libreriaActual.tiempoEntreArribosClientes();
+        Double tiempoDeArribo = this.getTiempoDeOcurrencia();
         Cliente clienteQueArribo = new Cliente(
             tiempoDeArribo, // tiempoDeArribo
             producto, // producto (tipo de producto)
             libreriaActual.cantidadDeArticulos(producto) // cantidadDeProductos
         );
-        contadoresEstadisticos.setTiempoDeInicioAtencionUltimoCliente(Main.getTiempoActual() + tiempoDeArribo);
-
-        if(modeloActual.estaEmpleadaOcupada()) {
+        
+        
+        if(modeloActual.estaEmpleadaOcupada()) { // La empleada está ocupada, por lo que el cliente debe ir a la cola.
             modeloActual.encolarCliente(clienteQueArribo);
-        }
-        else {
+        } else { // La empleada está desocupada, por lo que el cliente es atendido inmediatamente.
             clienteQueArribo.setTiempoDeInicioAtencion(this.getTiempoDeOcurrencia());
+            contadoresEstadisticos.setTiempoDeInicioAtencionUltimoCliente(this.getTiempoDeOcurrencia());
             modeloActual.atenderCliente(clienteQueArribo);
             Double duracionDelProcesamiento = libreriaActual.tiempoDeProcesamiento(clienteQueArribo.getProducto(), clienteQueArribo.getCantidadDeProductos());
             EventoTerminaProcesamiento nuevoEventoAdicional = new EventoTerminaProcesamiento(duracionDelProcesamiento);

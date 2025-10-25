@@ -24,7 +24,7 @@ public class EventoTerminaProcesamiento extends Evento {
         // Finalizar la atención del cliente que estaba siendo procesado.
         Double tiempoActualDeSimulacion = Main.getTiempoActual();
         Cliente clienteFinalizado = modeloActual.obtenerClienteEnAtencion();
-        clienteFinalizado.setTiempoDeFinAtencion(tiempoActualDeSimulacion); //TODO: Ver si conviene setearlo al finalizarAtencionCliente o al inicarAtencionCliente.
+        clienteFinalizado.setTiempoDeFinAtencion(tiempoActualDeSimulacion);
         modeloActual.finalizarAtencionCliente(tiempoActualDeSimulacion);
 
         // Actualizar contadores estadisticos
@@ -48,10 +48,6 @@ public class EventoTerminaProcesamiento extends Evento {
             Double duracionDelProcesamiento = libreriaActual.tiempoDeProcesamiento(clienteAAtender.getProducto(), clienteAAtender.getCantidadDeProductos());
             EventoTerminaProcesamiento nuevoEvento = new EventoTerminaProcesamiento(duracionDelProcesamiento);
             eventos.agregar(nuevoEvento);
-        }
-        else {
-            // TODO: Ver si es necesario, ya que modeloActual.finalizarAtencionCliente() ya deja a la empleada desocupada.
-            modeloActual.desocuparEmpleada();
         }
     }
 }
