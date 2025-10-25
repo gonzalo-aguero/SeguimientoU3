@@ -44,7 +44,6 @@ public class EventoArribarACola extends Evento {
         if(modeloActual.estaEmpleadaOcupada()) { // La empleada está ocupada, por lo que el cliente debe ir a la cola.
             modeloActual.encolarCliente(clienteQueArribo);
         } else { // La empleada está desocupada, por lo que el cliente es atendido inmediatamente.
-        } else { // La empleada está desocupada, por lo que el cliente es atendido inmediatamente.
             clienteQueArribo.setTiempoDeInicioAtencion(this.getTiempoDeOcurrencia());
             contadoresEstadisticos.setTiempoDeInicioAtencionUltimoCliente(this.getTiempoDeOcurrencia());
             contadoresEstadisticos.setTiempoDeInicioAtencionUltimoCliente(this.getTiempoDeOcurrencia());
@@ -53,5 +52,7 @@ public class EventoArribarACola extends Evento {
             EventoTerminaProcesamiento nuevoEventoAdicional = new EventoTerminaProcesamiento(duracionDelProcesamiento);
             eventos.agregar(nuevoEventoAdicional);
         }
+    }
+
     }
 }
