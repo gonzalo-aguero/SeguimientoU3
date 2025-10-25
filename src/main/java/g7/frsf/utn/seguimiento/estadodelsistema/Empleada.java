@@ -25,11 +25,11 @@ public class Empleada {
 	}
 
 	public Cliente finalizarAtencionCliente(Double tiempoActual) {
-		Cliente solicitudQueSale = clienteEnAtencion.orElseThrow(() -> new NoSuchElementException("No se estaba atendiendo a un cliente"));
+		Cliente clienteQueSale = clienteEnAtencion.orElseThrow(() -> new NoSuchElementException("No se estaba atendiendo a un cliente"));
 		this.clienteEnAtencion = Optional.empty();
 		cantidadClientesAtendidos++;
-		tiempoTotalOcupacion += tiempoActual - solicitudQueSale.getTiempoDeArribo();
-		return solicitudQueSale;
+		tiempoTotalOcupacion += tiempoActual - clienteQueSale.getTiempoDeArribo();
+		return clienteQueSale;
 	}
 	public void pasarADesocupada(){
 		this.clienteEnAtencion = Optional.empty();
