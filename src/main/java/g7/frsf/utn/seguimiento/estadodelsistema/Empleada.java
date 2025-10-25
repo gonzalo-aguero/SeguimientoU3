@@ -25,13 +25,11 @@ public class Empleada {
 	}
 
 	public Cliente finalizarAtencionCliente(Double tiempoActual) {
-		Cliente solicitudQueSale = clienteEnAtencion.orElseThrow(() -> new NoSuchElementException("No se estaba atendiendo a un cliente"));
+		Cliente clienteQueSale = clienteEnAtencion.orElseThrow(() -> new NoSuchElementException("No se estaba atendiendo a un cliente"));
 		this.clienteEnAtencion = Optional.empty();
 		cantidadClientesAtendidos++;
-		// TODO: Si al finalizar simulacion aún no termina de atender al cliente, se deberia considerar el tiempo restante en el reporte.
-		
-		tiempoTotalOcupacion += tiempoActual - solicitudQueSale.getTiempoDeArribo();
-		return solicitudQueSale;
+		tiempoTotalOcupacion += tiempoActual - clienteQueSale.getTiempoDeArribo();
+		return clienteQueSale;
 	}
 	public void pasarADesocupada(){
 		this.clienteEnAtencion = Optional.empty();
