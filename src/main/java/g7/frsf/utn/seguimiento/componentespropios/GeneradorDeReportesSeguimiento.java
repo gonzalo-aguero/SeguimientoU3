@@ -21,7 +21,8 @@ public class GeneradorDeReportesSeguimiento extends GeneradorDeReportes {
 
         // Calculo del tiempo promedio de los clientes en el kiosco
         Double tiempoPromedioClientesEnKiosco = (contadoresSeguimiento.getTiempoClientesEnKioscoAcumulado() / contadoresSeguimiento.getClientesProcesados()) / 60; // Convertir a horas
-        System.out.println("Tiempo Promedio de Clientes en Kiosco: " + tiempoPromedioClientesEnKiosco + " horas");
+        Double minutosPromedioClientesEnKiosco = tiempoPromedioClientesEnKiosco * 60;
+        System.out.println("Tiempo Promedio de Clientes en Kiosco: " + String.format("%.3f", tiempoPromedioClientesEnKiosco) + " horas (" + String.format("%.3f", minutosPromedioClientesEnKiosco) + " minutos)");
 
         // Calculo de la tasa de atencion por empleada
         Double tasaAtencionPorEmpleada = contadoresSeguimiento.getClientesProcesados().doubleValue() / Main.getTiempoASimular();
@@ -36,6 +37,6 @@ public class GeneradorDeReportesSeguimiento extends GeneradorDeReportes {
             tiempoOcupacion += Main.getTiempoActual() - contadoresSeguimiento.getTiempoDeInicioAtencionUltimoCliente();
         }
         Double porcentajeTiempoLibreEmpleada = ((tiempoTotalSimulacion - contadoresSeguimiento.getTiempoTotalOcupacion()) / tiempoTotalSimulacion) * 100;
-        System.out.println("Porcentaje de Tiempo Libre de la Empleada: " + porcentajeTiempoLibreEmpleada + "%");
+        System.out.println("Porcentaje de Tiempo Libre de la Empleada: " + String.format("%.3f", porcentajeTiempoLibreEmpleada) + "%");
     }
 }
