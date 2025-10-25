@@ -24,8 +24,6 @@
                     <release>21</release>
                 </configuration>
             </plugin>
-
-            <!-- Añade la clase Main al manifest para generar un JAR ejecutable -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-jar-plugin</artifactId>
@@ -38,8 +36,6 @@
                     </archive>
                 </configuration>
             </plugin>
-
-            <!-- Opcional: permitir mvn exec:java sin pasar -Dexec.mainClass -->
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>exec-maven-plugin</artifactId>

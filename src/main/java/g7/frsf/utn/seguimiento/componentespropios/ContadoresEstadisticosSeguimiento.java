@@ -3,12 +3,12 @@ package g7.frsf.utn.seguimiento.componentespropios;
 import g7.frsf.utn.des.ContadoresEstadisticos;
 
 public class ContadoresEstadisticosSeguimiento extends ContadoresEstadisticos {
-    Integer clientesProcesados;
-    Double beneficioTotalAcumulado;
-    Integer longitudColaAcumulada; // Para calcular longitud promedio de la cola al finalizar la simulación
-    Double tiempoClientesEnKioscoAcumulado;
-    Double tiempoTotalOcupacion;
-    Double tiempoDeInicioAtencionUltimoCliente; // Para considerar el tiempo de ocupación del último cliente atendido si la empleada está ocupada al finalizar la simulación
+    private Integer clientesProcesados;
+    private Double beneficioTotalAcumulado;
+    private Integer longitudColaAcumulada; // Para calcular longitud promedio de la cola al finalizar la simulación
+    private Double tiempoClientesEnKioscoAcumulado;
+    private Double tiempoTotalOcupacion;
+    private Double tiempoDeInicioAtencionUltimoCliente; // Para considerar el tiempo de ocupación del último cliente atendido si la empleada está ocupada al finalizar la simulación
     
     @Override
     public void inicializar() {
@@ -37,5 +37,49 @@ public class ContadoresEstadisticosSeguimiento extends ContadoresEstadisticos {
     }
     public void setTiempoDeInicioAtencionUltimoCliente(Double tiempoInicio) {
         this.tiempoDeInicioAtencionUltimoCliente = tiempoInicio;
+    }
+
+    public Integer getClientesProcesados() {
+        return clientesProcesados;
+    }
+
+    public void setClientesProcesados(Integer clientesProcesados) {
+        this.clientesProcesados = clientesProcesados;
+    }
+
+    public Double getBeneficioTotalAcumulado() {
+        return beneficioTotalAcumulado;
+    }
+
+    public void setBeneficioTotalAcumulado(Double beneficioTotalAcumulado) {
+        this.beneficioTotalAcumulado = beneficioTotalAcumulado;
+    }
+
+    public Integer getLongitudColaAcumulada() {
+        return longitudColaAcumulada;
+    }
+
+    public void setLongitudColaAcumulada(Integer longitudColaAcumulada) {
+        this.longitudColaAcumulada = longitudColaAcumulada;
+    }
+
+    public Double getTiempoClientesEnKioscoAcumulado() {
+        return tiempoClientesEnKioscoAcumulado;
+    }
+
+    public void setTiempoClientesEnKioscoAcumulado(Double tiempoClientesEnKioscoAcumulado) {
+        this.tiempoClientesEnKioscoAcumulado = tiempoClientesEnKioscoAcumulado;
+    }
+
+    public Double getTiempoTotalOcupacion() {
+        return tiempoTotalOcupacion;
+    }
+
+    public void setTiempoTotalOcupacion(Double tiempoTotalOcupacion) {
+        this.tiempoTotalOcupacion = tiempoTotalOcupacion;
+    }
+
+    public Double getTiempoDeInicioAtencionUltimoCliente() {
+        return tiempoDeInicioAtencionUltimoCliente;
     }
 }

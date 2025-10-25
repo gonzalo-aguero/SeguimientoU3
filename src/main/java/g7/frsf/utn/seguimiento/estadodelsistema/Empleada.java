@@ -29,6 +29,7 @@ public class Empleada {
 		this.clienteEnAtencion = Optional.empty();
 		cantidadClientesAtendidos++;
 		// TODO: Si al finalizar simulacion aún no termina de atender al cliente, se deberia considerar el tiempo restante en el reporte.
+		
 		tiempoTotalOcupacion += tiempoActual - solicitudQueSale.getTiempoDeArribo();
 		return solicitudQueSale;
 	}
