@@ -6,9 +6,10 @@ public class ContadoresEstadisticosSeguimiento extends ContadoresEstadisticos {
     Integer clientesProcesados;
     Double beneficioTotalAcumulado;
     Integer longitudColaAcumulada; // Para calcular longitud promedio de la cola al finalizar la simulación
-    Double tiempoClientesEnKioscoAcumulado;
-    Double tiempoTotalOcupacion;
+    Double tiempoClientesEnKioscoAcumulado; // en minutos
+    Double tiempoTotalOcupacion; // en minutos para calcular el porcentaje de tiempo libre de la empleada
     Double tiempoDeInicioAtencionUltimoCliente; // Para considerar el tiempo de ocupación del último cliente atendido si la empleada está ocupada al finalizar la simulación
+    private Boolean empleadaOcupadaAlFinalizarSimulacion;
     
     @Override
     public void inicializar() {
@@ -18,6 +19,7 @@ public class ContadoresEstadisticosSeguimiento extends ContadoresEstadisticos {
         tiempoClientesEnKioscoAcumulado = 0.0;
         tiempoTotalOcupacion = 0.0;
         tiempoDeInicioAtencionUltimoCliente = 0.0;
+        empleadaOcupadaAlFinalizarSimulacion = false;
     }
 
     public void actualizarClientesProcesados() {
@@ -37,5 +39,11 @@ public class ContadoresEstadisticosSeguimiento extends ContadoresEstadisticos {
     }
     public void setTiempoDeInicioAtencionUltimoCliente(Double tiempoInicio) {
         this.tiempoDeInicioAtencionUltimoCliente = tiempoInicio;
+    }
+    public void setEmpleadaOcupadaAlFinalizarSimulacion(Boolean ocupada) {
+        this.empleadaOcupadaAlFinalizarSimulacion = ocupada;
+    }
+    public Boolean getEmpleadaOcupadaAlFinalizarSimulacion() {
+        return empleadaOcupadaAlFinalizarSimulacion;
     }
 }
