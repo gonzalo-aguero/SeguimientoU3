@@ -6,8 +6,10 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="SeguimientoU3Simulacion" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="SeguimientoU3Simulacion" target="23" />
+    </bytecodeTargetLevel>
   </component>
 </project>
