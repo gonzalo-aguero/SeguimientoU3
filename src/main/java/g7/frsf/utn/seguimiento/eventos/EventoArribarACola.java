@@ -24,6 +24,7 @@ public class EventoArribarACola extends Evento {
 
 
         // Programar el próximo arribo a la cola de clientes (antes de procesar el arribo actual).
+        // Programar el próximo arribo a la cola de clientes (antes de procesar el arribo actual).
         EventoArribarACola nuevoEvento = new EventoArribarACola(libreriaActual.tiempoEntreArribosClientes());
         eventos.agregar(nuevoEvento);
 
@@ -38,9 +39,14 @@ public class EventoArribarACola extends Evento {
         
         
         if(modeloActual.estaEmpleadaOcupada()) { // La empleada está ocupada, por lo que el cliente debe ir a la cola.
+        
+        
+        if(modeloActual.estaEmpleadaOcupada()) { // La empleada está ocupada, por lo que el cliente debe ir a la cola.
             modeloActual.encolarCliente(clienteQueArribo);
         } else { // La empleada está desocupada, por lo que el cliente es atendido inmediatamente.
+        } else { // La empleada está desocupada, por lo que el cliente es atendido inmediatamente.
             clienteQueArribo.setTiempoDeInicioAtencion(this.getTiempoDeOcurrencia());
+            contadoresEstadisticos.setTiempoDeInicioAtencionUltimoCliente(this.getTiempoDeOcurrencia());
             contadoresEstadisticos.setTiempoDeInicioAtencionUltimoCliente(this.getTiempoDeOcurrencia());
             modeloActual.atenderCliente(clienteQueArribo);
             Double duracionDelProcesamiento = libreriaActual.tiempoDeProcesamiento(clienteQueArribo.getTipoProducto(), clienteQueArribo.getCantidadDeProductos());
