@@ -28,12 +28,12 @@ public class EventoArribarACola extends Evento {
         eventos.agregar(nuevoEvento);
 
         // Procesar el arribo de cliente actual.
-        Producto producto = libreriaActual.tipoProductoAComprar();
+        Producto tipoProducto = libreriaActual.tipoProductoAComprar();
         Double tiempoDeArribo = this.getTiempoDeOcurrencia();
         Cliente clienteQueArribo = new Cliente(
             tiempoDeArribo, // tiempoDeArribo
-            producto, // producto (tipo de producto)
-            libreriaActual.cantidadDeArticulos(producto) // cantidadDeProductos
+            tipoProducto, // producto (tipo de producto)
+            libreriaActual.cantidadDeArticulos(tipoProducto) // cantidadDeProductos
         );
         
         
@@ -43,7 +43,7 @@ public class EventoArribarACola extends Evento {
             clienteQueArribo.setTiempoDeInicioAtencion(this.getTiempoDeOcurrencia());
             contadoresEstadisticos.setTiempoDeInicioAtencionUltimoCliente(this.getTiempoDeOcurrencia());
             modeloActual.atenderCliente(clienteQueArribo);
-            Double duracionDelProcesamiento = libreriaActual.tiempoDeProcesamiento(clienteQueArribo.getProducto(), clienteQueArribo.getCantidadDeProductos());
+            Double duracionDelProcesamiento = libreriaActual.tiempoDeProcesamiento(clienteQueArribo.getTipoProducto(), clienteQueArribo.getCantidadDeProductos());
             EventoTerminaProcesamiento nuevoEventoAdicional = new EventoTerminaProcesamiento(duracionDelProcesamiento);
             eventos.agregar(nuevoEventoAdicional);
         }

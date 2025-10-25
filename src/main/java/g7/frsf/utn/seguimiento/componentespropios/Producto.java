@@ -1,21 +1,19 @@
 package g7.frsf.utn.seguimiento.componentespropios;
 
 public enum Producto{
-    BEBIDA_SALUDABLE("Bebida saludable",600.0,1200.0),
-    PANADERIA("Panaderia",400.0,850.0);
+    BEBIDA_SALUDABLE("Bebida saludable",600.0),
+    PANADERIA("Panaderia",450.0);
 
     private final String nombre;
-    private final Double costoUnitario;
-    private final Double precioUnitario;
+    private final Double beneficio;
 
-    private Producto(String nombre, Double costoUnitario, Double precioUnitario){
+    private Producto(String nombre, Double beneficio){
         this.nombre = nombre;
-        this.costoUnitario = costoUnitario;
-        this.precioUnitario = precioUnitario;
+        this.beneficio = beneficio;
     }
 
-    public Double getBeneficioUnitario(){
-        return this.precioUnitario - this.costoUnitario;
+    public Double getBeneficio(){
+        return this.beneficio;
     }
 
     @Override

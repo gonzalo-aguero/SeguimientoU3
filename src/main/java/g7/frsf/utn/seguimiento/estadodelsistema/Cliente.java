@@ -4,14 +4,14 @@ import g7.frsf.utn.seguimiento.componentespropios.Producto;
 
 public class Cliente {
     private Integer cantidadDeProductos;
-    private Producto producto;
+    private Producto tipoProducto;
     private Double tiempoDeArribo;
     private Double tiempoDeInicioAtencion;
     private Double tiempoDeFinAtencion;
 
-    public Cliente(Double tiempoDeArribo, Producto producto, Integer cantidadDeProductos) {
+    public Cliente(Double tiempoDeArribo, Producto tipoProducto, Integer cantidadDeProductos) {
         this.cantidadDeProductos = cantidadDeProductos;
-        this.producto = producto;
+        this.tipoProducto = tipoProducto;
         this.tiempoDeArribo = tiempoDeArribo;
     }
     public void setTiempoDeInicioAtencion(Double tiempoDeInicioAtencion) {
@@ -29,8 +29,8 @@ public class Cliente {
     public int getCantidadDeProductos() {
         return cantidadDeProductos;
     }
-    public Producto getProducto() {
-        return producto;
+    public Producto getTipoProducto() {
+        return tipoProducto;
     }
     public Double getTiempoDeArribo() {
         return tiempoDeArribo;

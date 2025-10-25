@@ -29,7 +29,7 @@ public class EventoTerminaProcesamiento extends Evento {
 
         // Actualizar contadores estadisticos
         contadoresEstadisticos.actualizarClientesProcesados();
-        Double beneficioObtenido = clienteFinalizado.getProducto().getBeneficioUnitario() * clienteFinalizado.getCantidadDeProductos();
+        Double beneficioObtenido = clienteFinalizado.getTipoProducto().getBeneficio() * clienteFinalizado.getCantidadDeProductos();
         contadoresEstadisticos.actualizarBeneficioTotalAcumulado(beneficioObtenido);
 
         Double tiempoDeInicioAtencion = clienteFinalizado.getTiempoDeInicioAtencion();
@@ -45,7 +45,7 @@ public class EventoTerminaProcesamiento extends Evento {
             clienteAAtender.setTiempoDeInicioAtencion(this.getTiempoDeOcurrencia());
             modeloActual.atenderCliente(clienteAAtender);
             
-            Double duracionDelProcesamiento = libreriaActual.tiempoDeProcesamiento(clienteAAtender.getProducto(), clienteAAtender.getCantidadDeProductos());
+            Double duracionDelProcesamiento = libreriaActual.tiempoDeProcesamiento(clienteAAtender.getTipoProducto(), clienteAAtender.getCantidadDeProductos());
             EventoTerminaProcesamiento nuevoEvento = new EventoTerminaProcesamiento(duracionDelProcesamiento);
             eventos.agregar(nuevoEvento);
         }
