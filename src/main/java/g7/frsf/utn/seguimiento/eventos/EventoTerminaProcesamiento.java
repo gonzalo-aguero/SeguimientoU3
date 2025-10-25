@@ -42,6 +42,7 @@ public class EventoTerminaProcesamiento extends Evento {
         // Verificar si hay clientes en espera para ser atendidos.
         if(modeloActual.hayClientesEnEspera()) {
             Cliente clienteAAtender = modeloActual.obtenerClienteEnEspera();
+            clienteAAtender.setTiempoDeInicioAtencion(this.getTiempoDeOcurrencia());
             modeloActual.atenderCliente(clienteAAtender);
             
             Double duracionDelProcesamiento = libreriaActual.tiempoDeProcesamiento(clienteAAtender.getProducto(), clienteAAtender.getCantidadDeProductos());

@@ -41,6 +41,7 @@ public class EventoArribarACola extends Evento {
             modeloActual.encolarCliente(clienteQueArribo);
         }
         else {
+            clienteQueArribo.setTiempoDeInicioAtencion(this.getTiempoDeOcurrencia());
             modeloActual.atenderCliente(clienteQueArribo);
             Double duracionDelProcesamiento = libreriaActual.tiempoDeProcesamiento(clienteQueArribo.getProducto(), clienteQueArribo.getCantidadDeProductos());
             EventoTerminaProcesamiento nuevoEventoAdicional = new EventoTerminaProcesamiento(duracionDelProcesamiento);
